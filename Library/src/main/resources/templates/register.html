@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        header {
+          background-color: #666;
+          padding: 30px;
+          text-align: center;
+          font-size: 20px;
+          color: white;
+        }
+        button {
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+        }
+
+        input[type=text], input[type=password], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        footer {
+          background-color: #777;
+          padding: 10px;
+          bottom: 0;
+          text-align: center;
+          color: white;
+        }
+        article {
+          float: left;
+          padding: 20px;
+          width: 100%;
+          background-color: #f1f1f1;
+          height: 400px; /* only for demonstration, should be removed */
+        }
+        .container {
+            padding: 50px;
+            height: 350px;
+            border: 3px solid #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/menu :: header-section">Header</div>
+<div class="container">
+    <form th:action="@{/saveUser}" method="post" th:object="${newUserModel}">
+        <div>
+            <label> Name : <input type="text" name="name" th:field="*{name}"/> </label>
+            <div th:errors="*{name}" style="color: red;" th:style="'color: red;'">Error Message</div>
+        </div>
+        <div>
+            <label> User Name : <input type="text" name="uname" th:field="*{uname}"/> </label>
+            <div th:errors="*{uname}" style="color: red;" th:style="'color: red;'">Error Message</div>
+        </div>
+        <div>
+            <label> Password: <input type="password" name="password" th:field="*{password}"/> </label>
+            <div th:errors="*{password}" style="color: red;" th:style="'color: red;'">Error Message</div>
+        </div>
+        <div>
+            <label> Role: </label>
+        </div>
+        <div>
+            <select id="role" name="role" th:field="*{role}">
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+            </select>
+            <div th:errors="*{role}" style="color: red;" th:style="'color: red;'">Error Message</div>
+        </div>
+        <div><button type="submit">Register</button></div>
+    </form>
+
+    <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;" th:style="'color: green;'">
+        Success Message Section
+    </div>
+</div>
+<div th:replace="fragments/menu :: footer-section">Header</div>
+</body>
+</html>
